@@ -36,8 +36,7 @@ class ArtworkImage:
 
         if Path(self.url).is_file():
             LOGGER.debug("Opening local image: %s", self.url)
-            with Path(self.url).open("rb") as fin:
-                artwork_bytes = fin.read()
+            artwork_bytes = Path(self.url).read_bytes()
         else:
             LOGGER.debug("Downloading artwork from remote URL: %s", self.url)
             artwork_bytes = get(self.url, timeout=30).content
